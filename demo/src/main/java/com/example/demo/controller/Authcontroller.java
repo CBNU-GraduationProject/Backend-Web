@@ -51,12 +51,11 @@ public class Authcontroller {
             String username = loginData.get("username");
             String password = loginData.get("password");
 
-            // AuthenticationManager를 사용하여 사용자 인증
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
 
-            // 인증 성공 후 토큰 생성
+            // JWT 토큰 생성
             String token = jwtTokenProvider.createToken(username);
 
             Map<String, String> result = new HashMap<>();
@@ -68,4 +67,5 @@ public class Authcontroller {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
         }
     }
+
 }
